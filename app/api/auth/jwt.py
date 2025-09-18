@@ -28,10 +28,6 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()) -> dict:
         "refresh_token": refresh_token
     }
 
-@auth_router.post("/test-token", summary="Test token", response_model=UserAuthResponse)
-async def test_token(user: User = Depends(get_current_user)) -> dict:
-    return user
-
 @auth_router.post("/refresh-token", summary="Refresh token", response_model=TokenSchema)
 async def refresh_token(refresh_token: str = Body(...)) -> dict:
     try:
